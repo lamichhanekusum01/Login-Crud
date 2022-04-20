@@ -53,6 +53,18 @@ export const userUpdate = async (req, res) => {
     }
 };
 
+export const userDelete = async (req, res) => {
+    try {
+        const _id = req.params.id;
+        const removeUser = await UserModel.findByIdAndDelete(_id);
+        res.send("User Removed Sucesfully");
+        
+    }
+    catch (error) {
+        res.json({ message: "Cannot delete user" });
+    }
+};
+
 // export const userLogin = async (req, res) => {
 //     try {
 
