@@ -9,6 +9,16 @@ export const allUser = async (req, res) => {
         res.json({ message: "No user found" });
     }
 };
+export const userDetails = async (req, res) => {
+    try {
+        const user = await UserModel.findById(req.params.id);
+        res.json(user);
+    }
+    catch (error) {
+        res.json({ message: error });
+    }
+};
+
 
 // export const userLogin = async (req, res) => {
 //     try {
