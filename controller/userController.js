@@ -29,18 +29,9 @@ export const createUser = async (req, res) => {
     password: password,
   });
   //creating token
-//   const token = jsonwebtoken.sign(
-//     {
-//       user_id: user._id,
-//       email,
-//     },
-//     process.env.SECRET_KEY,
-//     {
-//       expiresIn: "5h",
-//     }
-//   );
+  const token = jsonwebtoken.sign({userName, email}, process.env.SECRET_KEY);
   //save token
-//   userModel.token = token;
+  userModel.token = token;
   try {
     const savedUser = await userModel.save();
     res.send({
