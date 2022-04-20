@@ -64,7 +64,21 @@ export const userDelete = async (req, res) => {
         res.json({ message: "Cannot delete user" });
     }
 };
-
+export const userLogin = async (req, res) => {
+    try {
+      const email = req.body.email;
+      const password = req.body.password;
+      const userEmail = await UserModel.findOne({ email: email });
+      if (userEmail.password === password) {
+        res.status(201).send("Data login successfully");
+      } else {
+        res.send("Invalid login details");
+      }
+      
+    } catch (error) {
+      res.status(400).send("User not found");
+    }
+  };
 // export const userLogin = async (req, res) => {
 //     try {
 
