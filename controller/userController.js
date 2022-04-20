@@ -1,5 +1,5 @@
 import UserModel from "../model/userModel.js";
-
+import Bcrypt from "bcrypt";
 export const allUser = async (req, res) => {
     try {
         const users = await UserModel.find();
@@ -20,7 +20,8 @@ export const userDetails = async (req, res) => {
 };
 export const createUser = async (req, res) => {
 
-    const { userName, email, password } = req.body;
+    let { userName, email, password } = req.body;
+    password = Bcrypt.hashSync(password,10);
 
     const userModel = new UserModel({
         userName: userName,
@@ -57,7 +58,7 @@ export const userDelete = async (req, res) => {
     try {
         const _id = req.params.id;
         const removeUser = await UserModel.findByIdAndDelete(_id);
-        res.send("User Removed Sucesfully");
+        res.json({message:"User Removed Sucesfully"});
         
     }
     catch (error) {
@@ -69,14 +70,14 @@ export const userLogin = async (req, res) => {
       const email = req.body.email;
       const password = req.body.password;
       const userEmail = await UserModel.findOne({ email: email });
-      if (userEmail.password === password) {
-        res.status(201).send("Data login successfully");
+      if (Bcrypt.compareSync(password, userEmail.password)) {
+        res.status(201).json({message:"Data login successfully"});
       } else {
-        res.send("Invalid login details");
+        res.json({message:"Invalid login details"});
       }
-      
+    
     } catch (error) {
-      res.status(400).send("User not found");
+      res.status(400).json({message:"User not found"});
     }
   };
 // export const userLogin = async (req, res) => {
