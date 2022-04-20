@@ -82,7 +82,6 @@ export const userLogin = async (req, res) => {
     
     const email = req.body.email;
     const password = req.body.password;
-    console.log("YAha samma aipugyo");
     const userEmail = await UserModel.findOne({ email: email });
     if(bcrypt.compareSync(password, userEmail.password)) {
       res.status(201).send("Data login successfully");
@@ -92,6 +91,18 @@ export const userLogin = async (req, res) => {
   } catch (error) {
     res.status(400).send("User not found");
   }
+};
+
+export const userLogout =async(req,res)=>{
+    console.log("Hello world");
+    try{
+        // req.logout();
+        res.status(200).send("logout sucessfully");
+    }
+    catch(error)
+    {
+        res.status(400).send("cannot logout");
+    }
 };
 // export const userLogin = async (req, res) => {
 //     try {
