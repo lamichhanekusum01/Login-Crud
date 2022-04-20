@@ -18,6 +18,24 @@ export const userDetails = async (req, res) => {
         res.json({ message: error });
     }
 };
+export const createUser = async (req, res) => {
+
+    const { userName, email, password } = req.body;
+
+    const userModel = new UserModel({
+        userName: userName,
+        email: email,
+        password: password
+    });
+    try {
+        const savedUser = await userModel.save();
+        res.send({savedUser, message:"user created successfully", statusCode:200});
+    }
+    catch (error) {
+        res.json( error);
+    }
+
+};
 
 
 // export const userLogin = async (req, res) => {
