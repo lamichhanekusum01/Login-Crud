@@ -4,9 +4,7 @@ const UserModel= mongoose.model('Login',
         {
             userName: {
                 type: String,
-
                 required: [true,"Please mention your username"],
-
                 trim:true
             },
             email: {
@@ -19,8 +17,12 @@ const UserModel= mongoose.model('Login',
                   /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/,
                   "Please add a valid email",
                 ], 
-
+              
             },
+            token: {
+                type: String 
+               },
+
             
             password: {
                 type: String,
