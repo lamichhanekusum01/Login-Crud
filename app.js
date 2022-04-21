@@ -3,8 +3,11 @@ import conn from './db/conn.js';
 import useRouter from './routes/user.js';
 import  contactRouter from './routes/contact.js'
 import  projectRouter from './routes/project.js'
-
+import cors from 'cors'
 const app = express();
+app.use(cors({
+    origin:"http://localhost:3000",
+}))
 conn;
 
 app.use(express.json());

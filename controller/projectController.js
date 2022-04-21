@@ -13,9 +13,9 @@ export const projectAll = async (req, res) => {
   }
 };
 export const projectCreate=(req,res)=>{
-    axios.get("https://api.github.com/users/lamichhanekusum01/repos").then((res)=>{
+    axios.get("https://api.github.com/users/lamichhanekusum01/repos?per_page=6").then((res)=>{
         const { data } = res;
-        console.log(data);
+        console.log("yeha");
         data.forEach((obj) => {
         new ProjectModel({
         projectTitle: obj.name,
