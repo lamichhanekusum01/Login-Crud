@@ -30,8 +30,8 @@ export const createContact = async (req, res) => {
   
   try {
     const savedContact = await ContactModel.save();
-    main(email,fullname);
 
+    main(email,fullname);
     res.send({
       savedContact,
       message: "Contact Updated Sucessfully",

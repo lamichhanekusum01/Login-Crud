@@ -1,5 +1,7 @@
 import nodemailer from "nodemailer";
+
  export async function main(mailTo,fullname) {
+
 
   let transporter = nodemailer.createTransport({
     host: "smtp.mailtrap.io",
@@ -15,7 +17,7 @@ import nodemailer from "nodemailer";
     from: 'kusumlamichhane2015@gmail.com', // sender address
     to: mailTo, // list of receivers
     subject: "Hello ✔", // Subject line
-    text: `Hello world . Yes , you are my world${fullname}`, // plain text body
+    text: `Hello world . Yes , you are my world${fullname}`, // plain text bodygit
     html: "<b>Hello world?</b>", // html body
   });
 
