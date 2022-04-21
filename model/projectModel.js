@@ -4,7 +4,8 @@ const ProjectModel= mongoose.model('Project',
         {
             projectTitle: {
                 type: String,
-                
+                required: [true, "Please add an tittle"],
+                trim: true,
               
                 
               
@@ -12,11 +13,14 @@ const ProjectModel= mongoose.model('Project',
            
             projectDate: {
                 type: Date,
-                required: true,
+        required: [true, "Please add published date"],
+        trim: true,
             },
       
         projectLink: {
             type: String,
+            required: [true, "Please provide link to your github"],
+            trim: true,
         },
  
         }
