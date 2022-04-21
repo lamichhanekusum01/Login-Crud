@@ -1,6 +1,7 @@
 import jsonwebtoken from "jsonwebtoken";
 import UserModel from "../model/userModel.js";
-import bcrypt from "bcrypt"
+import bcrypt from "bcrypt";
+import auth  from "../middleware/auth.js";
 
 export const allUser = async (req, res) => {
   try {
@@ -85,7 +86,7 @@ export const userLogin = async (req, res) => {
 };
 
 export const userLogout =async(req,res)=>{
-    console.log("Hello world");
+   
     try{
         // req.logout();
         res.status(200).send("logout sucessfully");
@@ -95,6 +96,20 @@ export const userLogout =async(req,res)=>{
         res.status(400).send("cannot logout");
     }
 };
+export const userWelcome=async(req,res)=>
+{
+  try{
+    res.status(200).send("Welcome to login page");
+  }
+  catch(error)
+  {
+    res.status(401).send("invalid token");
+  }
+};
+
+
+
+
 // export const userLogin = async (req, res) => {
 //     try {
 
