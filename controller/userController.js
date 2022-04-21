@@ -1,6 +1,7 @@
 import jsonwebtoken from "jsonwebtoken";
 import UserModel from "../model/userModel.js";
-import bcrypt from "bcrypt"
+import bcrypt from "bcrypt";
+import auth  from "../middleware/auth.js";
 
 export const allUser = async (req, res) => {
   try {
@@ -29,18 +30,9 @@ export const createUser = async (req, res) => {
     password: password,
   });
   //creating token
-//   const token = jsonwebtoken.sign(
-//     {
-//       user_id: user._id,
-//       email,
-//     },
-//     process.env.SECRET_KEY,
-//     {
-//       expiresIn: "5h",
-//     }
-//   );
+  const token = jsonwebtoken.sign({userName, email}, process.env.SECRET_KEY);
   //save token
-//   userModel.token = token;
+  userModel.token = token;
   try {
     const savedUser = await userModel.save();
     res.send({
@@ -82,7 +74,6 @@ export const userLogin = async (req, res) => {
     
     const email = req.body.email;
     const password = req.body.password;
-    console.log("YAha samma aipugyo");
     const userEmail = await UserModel.findOne({ email: email });
     if(bcrypt.compareSync(password, userEmail.password)) {
       res.status(201).send("Data login successfully");
@@ -93,6 +84,32 @@ export const userLogin = async (req, res) => {
     res.status(400).send("User not found");
   }
 };
+
+export const userLogout =async(req,res)=>{
+   
+    try{
+        // req.logout();
+        res.status(200).send("logout sucessfully");
+    }
+    catch(error)
+    {
+        res.status(400).send("cannot logout");
+    }
+};
+export const userWelcome=async(req,res)=>
+{
+  try{
+    res.status(200).send("Welcome to login page");
+  }
+  catch(error)
+  {
+    res.status(401).send("invalid token");
+  }
+};
+
+
+
+
 // export const userLogin = async (req, res) => {
 //     try {
 
