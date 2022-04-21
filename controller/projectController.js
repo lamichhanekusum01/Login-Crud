@@ -1,11 +1,29 @@
-import ProjectModel from "../model/contactModel.js";
+import ProjectModel from "../model/projectModel.js";
+import axios from "axios";
 
 
 export const projectAll = async (req, res) => {
   try {
-    const contacts = await contactModel.find();
-    res.json(contacts);
+    
+
+    const projects = await ProjectModel.find();
+    res.json(projects);
   } catch (error) {
     res.json({ message: "No user found" });
   }
+};
+export const projectCreate=(req,res)=>{
+    axios.get("https://api.github.com/users/lamichhanekusum01/repos").then((res)=>{
+        const { data } = res;
+        console.log(data);
+        data.forEach((obj) => {
+        new ProjectModel({
+        projectTitle: obj.name,
+        projectDate: obj.pushed_at,
+        projectLink: obj.html_url,
+      }).save();
+    });
+  })
+
+  .catch((error) => console.log(error));
 };

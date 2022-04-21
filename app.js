@@ -1,13 +1,16 @@
 import express from 'express';
 import conn from './db/conn.js';
-
+import useRouter from './routes/user.js';
 import  contactRouter from './routes/contact.js'
+import  projectRouter from './routes/project.js'
 
 const app = express();
 conn;
 
 app.use(express.json());
-app.use("/user",contactRouter)
+app.use("/user",useRouter);
+app.use("/contact", contactRouter);
+app.use("/project", projectRouter);
 
 app.get('/', (req, res) => {
     res.status(200).json({message: "Hello from my-express-app!"});
