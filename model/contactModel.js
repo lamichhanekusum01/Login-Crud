@@ -1,15 +1,14 @@
 import mongoose from "mongoose";
-const UserModel= mongoose.model('Login', 
+const contactModel= mongoose.model('contact', 
     mongoose.Schema(
         {
-            userName: {
+            fullname: {
                 type: String,
                 required: [true,"Please mention your username"],
                 trim:true
             },
             email: {
                 type: String,
-
                 unique: true,
                 required: [true, "Please add an email"],
                 trim: true,
@@ -19,18 +18,12 @@ const UserModel= mongoose.model('Login',
                 ], 
               
             },
-            token: {
-                type: String 
-               },
-
-            
-            password: {
+            message: {
                 type: String,
-                required: true,
-                trim:true
+               
             }
         },
         {timestamps: true}
     )
 );
-export default UserModel;
+export default contactModel;
